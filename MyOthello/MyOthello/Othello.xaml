@@ -1,0 +1,39 @@
+﻿<Window x:Class="MyOthello.Othello"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyOthello"
+        mc:Ignorable="d"
+        Title="Othello" Height="800" Width="800">
+    <Grid Name="myGrid" Background="Transparent" PreviewMouseLeftButtonDown="MyGrid_PreviewMouseLeftButtonDown" Margin="0,70,0,0" ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle Name="rectangle1" Stroke="Black" Fill="Aquamarine" Grid.ColumnSpan="8" Margin="0,0,-2,-1" Grid.RowSpan="8" />
+        <TextBox x:Name="player1txtBox" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="56" Margin="76,-64,0,0" TextWrapping="Wrap" Text="Player1:" VerticalAlignment="Top" Width="156" FontSize="36"/>
+        <TextBox x:Name="player2txtBox" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="56" Margin="84,-64,0,0" TextWrapping="Wrap" Text="Player2:" VerticalAlignment="Top" Width="156" Grid.Column="4" FontSize="36"/>
+        <TextBox x:Name="player1scoreBox" Grid.Column="2" HorizontalAlignment="Left" Height="56" Margin="39,-64,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="48" FontSize="36"/>
+        <TextBox x:Name="player2scoreBox" Grid.Column="6" HorizontalAlignment="Left" Height="56" Margin="42,-64,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="48" FontSize="36"/>
+        <Image x:Name="player1Active" Source="pack://application:,,,/Images/activesmoll.png" HorizontalAlignment="Left" Height="56" Margin="24,-56,0,0" VerticalAlignment="Top" Width="47" Visibility="Collapsed"/>
+        <Image x:Name="player2Active" Source="Images/activesmoll.png" HorizontalAlignment="Left" Height="56" Margin="32,-56,0,0" VerticalAlignment="Top" Width="47" Grid.Column="4" Visibility="Collapsed"/>
+        <Button x:Name="endGameBtn" Content="EndGame" Grid.Column="7" HorizontalAlignment="Left" Margin="12,-39,0,0" VerticalAlignment="Top" Width="75" Click="endGameBtn_Click"/>
+    </Grid>
+</Window>
