@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-S:\Projects\MyOthello\MyOthello\obj\Debug\
+S:\Documents\GitHub\myOthello\MyOthello\MyOthello\obj\Debug\
 MyOthello
 none
 false
 DEBUG;TRACE
-S:\Projects\MyOthello\MyOthello\App.xaml
+S:\Documents\GitHub\myOthello\MyOthello\MyOthello\App.xaml
 4-1992958972
 
-11-1350346304
+121498723925
 13-1505183044
 MainWindow.xaml;Othello.xaml;OthelloGameOver.xaml;OthelloSetUp.xaml;
 
-False
+True
 
