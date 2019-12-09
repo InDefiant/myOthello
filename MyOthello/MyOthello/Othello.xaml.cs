@@ -73,8 +73,7 @@ namespace MyOthello
                 myGrid.Children.Add(img);
             }
 
-            player1.score = othelloBoard.player1Score;
-            player2.score = othelloBoard.player2Score;
+            othelloBoard.UpdateScore(player1,player2);
 
             player1scoreBox.Text = player1.score.ToString();
             player2scoreBox.Text = player2.score.ToString();
@@ -95,10 +94,10 @@ namespace MyOthello
 
 
 
-            if (!othelloBoard.AnyViableMoves(player1) && !othelloBoard.AnyViableMoves(player2))
-            {
-                GameOver();
-            }
+            //if (!othelloBoard.AnyViableMoves(player1) && !othelloBoard.AnyViableMoves(player2))
+            //{
+            //    GameOver();
+            //}
 
         }
 
@@ -112,13 +111,13 @@ namespace MyOthello
             {
                 OthelloGameOver gameOver = new OthelloGameOver(player1.name,player2.name,player1.score,player2.score);
                 gameOver.Show();
-                this.Close();
+                this.Hide();
             }
             else
             {
                 OthelloGameOver gameOver = new OthelloGameOver(player2.name,player1.name,player2.score,player1.score);
                 gameOver.Show();
-                this.Close();
+                this.Hide();
             }
 
         }
@@ -155,17 +154,18 @@ namespace MyOthello
                 }
 
                 //Used to Debug where you are clicking in Graph
-                //MessageBox.Show(string.Format("Grid clicked at row {0}, col {1}", row, col));
+                MessageBox.Show(string.Format("Grid clicked at row {0}, col {1}", row, col));
 
-
+                Tile newTile = new Tile();
+                newTile = othelloBoard.gameBoard[row, col];
                 //Depending on the Player's turn it Checks to make sure the move is Valid
                 //Then it Executes the Player's Move and Changes the turn along with updating the board
 
                 if (othelloBoard.playerTurn == 1)
                 {
-                    if (othelloBoard.ValidMove(row, col, player1))
+                    if (othelloBoard.ValidMove(newTile, player1))
                     {
-                        othelloBoard.PlayerMove(row, col, player1);
+                        othelloBoard.PlayerMove(newTile, player1);
                         othelloBoard.NextTurn();
                         UpdateBoard();
                         return;
@@ -184,9 +184,9 @@ namespace MyOthello
                 if (othelloBoard.playerTurn == 2)
                 {
                     
-                    if (othelloBoard.ValidMove(row, col, player2))
+                    if (othelloBoard.ValidMove(newTile, player2))
                     {
-                        othelloBoard.PlayerMove(row, col, player2);
+                        othelloBoard.PlayerMove(newTile, player2);
                         othelloBoard.NextTurn();
                         UpdateBoard();
                         return;

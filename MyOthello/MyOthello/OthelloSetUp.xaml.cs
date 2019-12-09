@@ -30,9 +30,9 @@ namespace MyOthello
         //Handles the Name selection for each player
         private void start_Click(object sender, RoutedEventArgs e)
         {
-            Othello othello = new Othello(p1Name.Text,p2Name.Text);
+            Othello othello = new Othello(p1Name.Text, p2Name.Text);
             othello.Show();
-            this.Close();
+            this.Hide();
         }
     }
 }

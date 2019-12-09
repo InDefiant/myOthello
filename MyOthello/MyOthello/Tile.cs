@@ -12,6 +12,7 @@ namespace MyOthello
     {
         public bool active { get; set; }
         public string color { get; set; }
+        public string opposingColor;
         public int rowPosition { get; set; }
         public int columnPosition { get; set; }
 
@@ -19,6 +20,23 @@ namespace MyOthello
         {
             this.active = false;
             this.color = "";
+        }
+
+        public void setTileColor(string color)
+        {
+            this.color = color;
+
+            if (this.color == "white") this.opposingColor = "black";
+            else if (this.color == "black") this.opposingColor = "white";
+        }
+
+        public void flipTileColors(string oldColor, string newColor)
+        {
+            if(this.color != "")
+            {
+                this.color = "";
+                this.opposingColor = "";
+            }
         }
     }
 }

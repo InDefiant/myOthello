@@ -48,7 +48,7 @@ namespace MyOthello
             MessageBox.Show("Please Find An Alien");
             MessageBox.Show("Actually Let's just play against another Human for now.");
             setUp.Show();
-            this.Close();
+            this.Hide();
         }
     }
 }
