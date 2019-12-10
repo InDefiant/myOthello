@@ -151,8 +151,6 @@ namespace MyOthello
         public bool NewCheckTilesToFlip(Tile startTile)
         {
             tilesToFlip.Clear();
-            Tile checkTile = startTile;
-
             foreach (string direction in directionsToCheck)
             {
                 if (direction == "Up") SearchAndFlip(startTile, "row", -1, 0);
@@ -178,23 +176,25 @@ namespace MyOthello
 
             while(true)
             {
-                if (type == "row") checkTile = ToGameBoard(TileTransform.ModifyRow(checkTile, row => row + (1 * rowMult)));
-                if (type == "col") checkTile = ToGameBoard(TileTransform.ModifyColumn(checkTile, col => col + (1 * colMult)));
-                if (type == "both") checkTile = ToGameBoard(TileTransform.ModifyDiagonal(checkTile, row => row + (1 * rowMult), col => col + (1 * colMult)));
+                if (type == "row") checkTile = TileTransform.ModifyRow(checkTile, row => row + (1 * rowMult));
+                if (type == "col") checkTile = TileTransform.ModifyColumn(checkTile, col => col + (1 * colMult));
+                if (type == "both") checkTile = TileTransform.ModifyDiagonal(checkTile, row => row + (1 * rowMult), col => col + (1 * colMult));
+
+                checkTile = ToGameBoard(checkTile);
 
                 if(checkTile.color == startTile.color)
                 {
                     while (true)
                     {
-                        if (type == "row") checkTile = ToGameBoard(TileTransform.ModifyRow(checkTile, row => row + (1 * rowMult * -1)));
-                        if (type == "col") checkTile = ToGameBoard(TileTransform.ModifyColumn(checkTile, col => col + (1 * colMult * -1)));
-                        if (type == "both") checkTile = ToGameBoard(TileTransform.ModifyDiagonal(checkTile, row => row + (1 * rowMult * -1), col => col + (1 * colMult * -1)));
+                        if (type == "row") checkTile = TileTransform.ModifyRow(checkTile, row => row + (1 * rowMult * -1));
+                        if (type == "col") checkTile = TileTransform.ModifyColumn(checkTile, col => col + (1 * colMult * -1));
+                        if (type == "both") checkTile = TileTransform.ModifyDiagonal(checkTile, row => row + (1 * rowMult * -1), col => col + (1 * colMult * -1));
 
                         if (type == "row" && checkTile.rowPosition == 0 || checkTile.rowPosition == 7) break;
                         if (type == "col" && checkTile.columnPosition == 0 || checkTile.columnPosition == 7) break;
                         if (type == "both" && checkTile.rowPosition == 0 || checkTile.rowPosition == 7 || checkTile.columnPosition == 0 || checkTile.columnPosition == 7) break;
                         if (checkTile.rowPosition == startTile.rowPosition && checkTile.columnPosition == startTile.columnPosition) break;
-                        tilesToFlip.Add(checkTile);
+                        tilesToFlip.Add(gameBoard[checkTile.rowPosition,checkTile.columnPosition]);
                     }
                     break;
                 }
@@ -207,7 +207,12 @@ namespace MyOthello
 
         private Tile ToGameBoard(Tile tile)
         {
-            return gameBoard[tile.rowPosition, tile.columnPosition];
+            Tile newTile = new Tile();
+            newTile = tile;
+            newTile.color = gameBoard[tile.rowPosition, tile.columnPosition].color;
+            newTile.opposingColor = gameBoard[tile.rowPosition, tile.columnPosition].opposingColor;
+
+            return newTile;
         }
 
         //Checks to make sure there are viable moves in order to either skip a players turn or end the game if neither player has a viable move
